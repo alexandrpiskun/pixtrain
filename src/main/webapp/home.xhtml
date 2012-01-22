@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/default.xhtml">
+
+    <ui:define name ="content"> 
+        <div>
+            <script type="text/javascript"> 
+                /*
+                FB.api('/me', function(user) {
+                if (user) {
+                var image = document.getElementById('image');
+                image.src = 'http://graph.facebook.com/' + user.id + '/picture';
+                var name = document.getElementById('name');
+                name.innerHTML = user.name
+                }
+                }); */
+                function onLogin(){
+                    FB.api('/me', function(user) {
+                        if (user) {
+                            $(".fb-login-button").css("display","none");
+                            var image = document.getElementById('image');
+                            image.src = 'http://graph.facebook.com/' + user.id + '/picture';
+                            var name = document.getElementById('name');
+                            name.innerHTML = user.name
+                        }
+                    });     
+                }
+            </script>   
+            <ui:fragment rendered="#{not hwc.FBLogged}">
+                <div class="fb-login-button" data-scope="user_photos" 
+                 onlogin="onLogin();"> Login with Facebook</div>
+            </ui:fragment>
+            <ui:fragment rendered="#{hwc.FBLogged}">
+            <script  type="text/javascript"> 
+                  OnLogin(); alert("1");
+            </script>
+            <div id="fbprofile" align="left">
+                <img id="image"/>
+                <div id="name"></div>
+            </div>
+                
+            </ui:fragment>
+            <!--a href="https://www.facebook.com/dialog/oauth?client_id=349298141753447&amp;redirect_uri=http%3A//localhost%3A8080/&amp;scope=user_photos">Auth</a -->
+        </div>      
+        
+        HEllo-#{hwc.FBLogged}-
+        
+        
+        <div id="leftcontainer" class="imwidgetpanel">
+            <div class="imwidget"> pic1 </div>
+            <div class="imwidget"> pic2 </div>
+            <div class="imwidget"> pic3 </div>
+            <div class="imwidget"> pic4 </div>
+            <div class="imwidget"> pic5 </div>
+            <div class="imwidget"> pic6 </div>
+            <div class="imwidget"> pic7 </div>
+            <div class="imwidget"> pic8 </div>
+        </div>
+
+        <div id="rightcontainer" class="imwidgetpanel" >
+            <div class="imwidget"> img1 </div>
+            <div class="imwidget"> img2 </div>
+            <div class="imwidget"> img3 </div>
+            <div class="imwidget"> img4 </div>
+            <div class="imwidget"> img5 </div>
+            <div class="imwidget"> img6 </div>
+            <div class="imwidget"> img7 </div>
+            <div class="imwidget"> img8 </div>
+        </div>
+
+    </ui:define>
+</ui:composition>

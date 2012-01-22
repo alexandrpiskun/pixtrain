@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/templates/default.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name ="content"> 
+        <h:outputText value="Calc methods" />
+        <div id="cmt" style="padding: auto;">
+        <h:dataTable id="cm"  value="#{calcmethod.methods}" var="item" width="700px"> 
+            <h:column> 
+                <f:facet name="header">#</f:facet>
+                1
+            </h:column>
+
+            <h:column> 
+                <f:facet name="header">Body</f:facet>
+                #{item}
+            </h:column>
+        </h:dataTable>
+        </div>
+        <div>
+            <h:form>
+            <h:outputLabel    value="New method body"  />
+            <h:inputTextarea  value="#{calcmethod.method}"  />
+            <h:commandButton  value="Add" action="#{calcmethod.addMethod('')}"/>
+            </h:form>
+        </div>
+        
+    </ui:define>
+</ui:composition>
